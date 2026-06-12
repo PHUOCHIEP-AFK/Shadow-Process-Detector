@@ -11,8 +11,7 @@ import { Progress } from '@/components/ui/Progress'
 import { StatCard } from '@/components/ui/StatCard'
 import { bottleneckData, heatmapData, resourceData } from '@/data/mockData'
 
-const hours = ['8AM', '9AM', '10AM', '11AM', '12PM', '1PM', '2PM', '3PM', '4PM', '5PM']
-const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']
+const days = ['T2', 'T3', 'T4', 'T5', 'T6']
 
 const getHeatColor = (value: number): string => {
   if (value >= 9) return 'bg-red-600 dark:bg-red-500'
@@ -40,14 +39,14 @@ export function BottleneckAnalysisPage() {
   const [selectedActivity, setSelectedActivity] = useState<string | null>(null)
 
   const kpis = [
-    { title: 'Avg Process Delay', value: '3.7h', subtitle: 'Per bottleneck activity', icon: <Clock size={16} />, color: 'yellow' as const, trend: { value: -5.2 }, index: 0 },
-    { title: 'Most Delayed Activity', value: 'Contract Sign-off', subtitle: '6.1h avg delay', icon: <AlertTriangle size={16} />, color: 'red' as const, index: 1 },
-    { title: 'Critical Bottlenecks', value: '3', subtitle: 'Immediate action needed', icon: <Zap size={16} />, color: 'red' as const, index: 2 },
-    { title: 'Overloaded Resources', value: '4', subtitle: '>80% utilization', icon: <Users size={16} />, color: 'yellow' as const, trend: { value: -12.1 }, index: 3 },
+    { title: 'Độ trễ TB quy trình', value: '3.7h', subtitle: 'Mỗi điểm tắc nghẽn', icon: <Clock size={16} />, color: 'yellow' as const, trend: { value: -5.2 }, index: 0 },
+    { title: 'Hoạt động chậm nhất', value: 'Ký kết hợp đồng', subtitle: 'TB độ trễ 6.1h', icon: <AlertTriangle size={16} />, color: 'red' as const, index: 1 },
+    { title: 'Tắc nghẽn nghiêm trọng', value: '3', subtitle: 'Cần xử lý ngay', icon: <Zap size={16} />, color: 'red' as const, index: 2 },
+    { title: 'Nguồn lực quá tải', value: '4', subtitle: '>80% công suất', icon: <Users size={16} />, color: 'yellow' as const, trend: { value: -12.1 }, index: 3 },
   ]
 
   const criticalPath = [
-    'Submit Request', 'Manager Review', 'Finance Approval', 'Contract Sign-off', 'Legal Review', 'Payment'
+    'Gửi yêu cầu', 'Quản lý xem xét', 'Phê duyệt tài chính', 'Ký kết hợp đồng', 'Xem xét pháp lý', 'Thanh toán'
   ]
 
   return (
@@ -64,9 +63,9 @@ export function BottleneckAnalysisPage() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Zap size={16} className="text-yellow-500" />
-              Bottleneck Severity Analysis
+              Phân tích mức độ tắc nghẽn
             </CardTitle>
-            <p className="text-xs text-slate-400 mt-0.5">Average vs max delay by activity</p>
+            <p className="text-xs text-slate-400 mt-0.5">Độ trễ trung bình so với tối đa theo hoạt động</p>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={240}>
@@ -75,18 +74,12 @@ export function BottleneckAnalysisPage() {
                 <XAxis type="number" tick={{ fontSize: 10, fill: '#64748b' }} unit="h" axisLine={false} tickLine={false} />
                 <YAxis dataKey="activity" type="category" tick={{ fontSize: 10, fill: '#64748b' }} width={130} axisLine={false} tickLine={false} />
                 <Tooltip content={<CustomBarTooltip />} />
-                <Bar dataKey="avgDelay" name="Avg Delay" radius={[0, 4, 4, 0]} maxBarSize={14}>
+                <Bar dataKey="avgDelay" name="TB Trễ" radius={[0, 4, 4, 0]} maxBarSize={14}>
                   {bottleneckData.map((entry, i) => (
-                    <Cell
-                      key={i}
-                      fill={entry.severity === 'critical' ? '#ef4444' : entry.severity === 'high' ? '#f97316' : '#f59e0b'}
-                      opacity={selectedActivity === entry.activity ? 1 : 0.85}
-                      cursor="pointer"
-                      onClick={() => setSelectedActivity(selectedActivity === entry.activity ? null : entry.activity)}
-                    />
+                    <Cell key={i} fill={entry.severity === 'critical' ? '#ef4444' : entry.severity === 'high' ? '#f97316' : '#f59e0b'} opacity={selectedActivity === entry.activity ? 1 : 0.85} cursor="pointer" onClick={() => setSelectedActivity(selectedActivity === entry.activity ? null : entry.activity)} />
                   ))}
                 </Bar>
-                <Bar dataKey="maxDelay" name="Max Delay" fill="#1e293b" radius={[0, 4, 4, 0]} maxBarSize={14} opacity={0.5} />
+                <Bar dataKey="maxDelay" name="Trễ Tối Đa" fill="#1e293b" radius={[0, 4, 4, 0]} maxBarSize={14} opacity={0.5} />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
@@ -97,9 +90,9 @@ export function BottleneckAnalysisPage() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <TrendingDown size={16} className="text-red-500" />
-              Activity Bottleneck Heatmap
+              Bản đồ nhiệt tắc nghẽn
             </CardTitle>
-            <p className="text-xs text-slate-400 mt-0.5">Congestion level by time and day</p>
+            <p className="text-xs text-slate-400 mt-0.5">Mức tắc nghẽn theo giờ và ngày</p>
           </CardHeader>
           <CardContent>
             <div className="overflow-x-auto">
@@ -127,11 +120,11 @@ export function BottleneckAnalysisPage() {
               ))}
               {/* Legend */}
               <div className="flex items-center gap-2 mt-3 justify-end">
-                <span className="text-[10px] text-slate-400">Low</span>
+                <span className="text-[10px] text-slate-400">Thấp</span>
                 {['bg-slate-200', 'bg-blue-300', 'bg-yellow-400', 'bg-orange-500', 'bg-red-600'].map(c => (
                   <div key={c} className={`w-5 h-3 rounded ${c}`} />
                 ))}
-                <span className="text-[10px] text-slate-400">High</span>
+                <span className="text-[10px] text-slate-400">Cao</span>
               </div>
             </div>
           </CardContent>
@@ -145,23 +138,18 @@ export function BottleneckAnalysisPage() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Users size={16} className="text-blue-600" />
-              Resource Utilization
+              Sử dụng nguồn lực
             </CardTitle>
-            <p className="text-xs text-slate-400 mt-0.5">Capacity usage by team</p>
+            <p className="text-xs text-slate-400 mt-0.5">Mức sử dụng công suất theo nhóm</p>
           </CardHeader>
           <CardContent className="space-y-4">
             {resourceData.map((r, i) => (
-              <motion.div
-                key={r.name}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.08 }}
-              >
+              <motion.div key={r.name} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.08 }}>
                 <div className="flex items-center justify-between mb-1.5">
                   <span className="text-sm text-slate-700 dark:text-slate-300">{r.name}</span>
                   <div className="flex items-center gap-2">
-                    {r.utilization >= 90 && <Badge variant="danger" size="sm">Overloaded</Badge>}
-                    {r.utilization >= 80 && r.utilization < 90 && <Badge variant="warning" size="sm">High</Badge>}
+                    {r.utilization >= 90 && <Badge variant="danger" size="sm">Quá tải</Badge>}
+                    {r.utilization >= 80 && r.utilization < 90 && <Badge variant="warning" size="sm">Cao</Badge>}
                     <span className="text-sm font-bold text-slate-800 dark:text-slate-200">{r.utilization}%</span>
                   </div>
                 </div>
@@ -180,9 +168,9 @@ export function BottleneckAnalysisPage() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <AlertTriangle size={16} className="text-orange-500" />
-              Critical Path Analysis
+              Phân tích đường dẫn tới hạn
             </CardTitle>
-            <p className="text-xs text-slate-400 mt-0.5">Invoice Approval Process — Longest execution path</p>
+            <p className="text-xs text-slate-400 mt-0.5">Quy trình phê duyệt hóa đơn — Đường thực thi dài nhất</p>
           </CardHeader>
           <CardContent>
             <div className="relative">
@@ -213,7 +201,7 @@ export function BottleneckAnalysisPage() {
                         )}
                       </div>
                       {isCritical && (
-                        <p className="text-xs text-red-400 mt-0.5">Critical bottleneck — immediate action required</p>
+                        <p className="text-xs text-red-400 mt-0.5">Tắc nghẽn nghiêm trọng — Cần xử lý ngay</p>
                       )}
                     </div>
                   </motion.div>

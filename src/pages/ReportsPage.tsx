@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import {
-  FileText, Download, Eye, Calendar, Filter,
+  FileText, Download, Eye, Calendar,
   BarChart2, Shield, AlertTriangle, TrendingUp,
   RefreshCw, FileCheck, ChevronRight
 } from 'lucide-react'
@@ -22,38 +22,46 @@ interface Report {
 }
 
 const reports: Report[] = [
-  { id: 'r1', name: 'Executive Summary — Q4 2025', type: 'executive', status: 'ready', date: 'Dec 31, 2025', size: '2.4 MB', pages: 12, icon: TrendingUp },
-  { id: 'r2', name: 'Process Risk Report — Dec 2025', type: 'risk', status: 'ready', date: 'Dec 28, 2025', size: '4.1 MB', pages: 28, icon: AlertTriangle },
-  { id: 'r3', name: 'Compliance Report — Q4 2025', type: 'compliance', status: 'ready', date: 'Dec 27, 2025', size: '3.8 MB', pages: 22, icon: Shield },
-  { id: 'r4', name: 'Invoice Process Analysis', type: 'process', status: 'ready', date: 'Dec 22, 2025', size: '1.9 MB', pages: 15, icon: BarChart2 },
-  { id: 'r5', name: 'Shadow Process Detection — Nov 2025', type: 'risk', status: 'ready', date: 'Nov 30, 2025', size: '5.2 MB', pages: 34, icon: AlertTriangle },
-  { id: 'r6', name: 'Monthly Compliance — Nov 2025', type: 'compliance', status: 'ready', date: 'Nov 28, 2025', size: '3.2 MB', pages: 20, icon: Shield },
-  { id: 'r7', name: 'Q1 2026 Report (Scheduled)', type: 'executive', status: 'scheduled', date: 'Mar 31, 2026', size: '—', pages: 0, icon: Calendar },
+  { id: 'r1', name: 'Báo cáo tổng quan Ban lãnh đạo — Q4 2025', type: 'executive', status: 'ready', date: '31 Th12, 2025', size: '2.4 MB', pages: 12, icon: TrendingUp },
+  { id: 'r2', name: 'Báo cáo rủi ro quy trình — Th12 2025', type: 'risk', status: 'ready', date: '28 Th12, 2025', size: '4.1 MB', pages: 28, icon: AlertTriangle },
+  { id: 'r3', name: 'Báo cáo tuân thủ — Q4 2025', type: 'compliance', status: 'ready', date: '27 Th12, 2025', size: '3.8 MB', pages: 22, icon: Shield },
+  { id: 'r4', name: 'Phân tích quy trình hóa đơn', type: 'process', status: 'ready', date: '22 Th12, 2025', size: '1.9 MB', pages: 15, icon: BarChart2 },
+  { id: 'r5', name: 'Phát hiện quy trình ngầm — Th11 2025', type: 'risk', status: 'ready', date: '30 Th11, 2025', size: '5.2 MB', pages: 34, icon: AlertTriangle },
+  { id: 'r6', name: 'Tuân thủ hàng tháng — Th11 2025', type: 'compliance', status: 'ready', date: '28 Th11, 2025', size: '3.2 MB', pages: 20, icon: Shield },
+  { id: 'r7', name: 'Báo cáo Q1 2026 (Đã lên lịch)', type: 'executive', status: 'scheduled', date: '31 Th3, 2026', size: '—', pages: 0, icon: Calendar },
 ]
 
 const typeConfig = {
-  executive: { label: 'Executive', variant: 'info' as const, color: 'bg-blue-50 dark:bg-blue-900/20' },
-  compliance: { label: 'Compliance', variant: 'success' as const, color: 'bg-emerald-50 dark:bg-emerald-900/20' },
-  risk: { label: 'Risk', variant: 'danger' as const, color: 'bg-red-50 dark:bg-red-900/20' },
-  process: { label: 'Process', variant: 'warning' as const, color: 'bg-yellow-50 dark:bg-yellow-900/20' },
+  executive: { label: 'Ban lãnh đạo', variant: 'info' as const, color: 'bg-blue-50 dark:bg-blue-900/20' },
+  compliance: { label: 'Tuân thủ', variant: 'success' as const, color: 'bg-emerald-50 dark:bg-emerald-900/20' },
+  risk: { label: 'Rủi ro', variant: 'danger' as const, color: 'bg-red-50 dark:bg-red-900/20' },
+  process: { label: 'Quy trình', variant: 'warning' as const, color: 'bg-yellow-50 dark:bg-yellow-900/20' },
 }
 
 const generateTemplates = [
   {
-    id: 'exec', name: 'Executive Summary', desc: 'High-level KPIs, shadow process count, compliance scores and trends',
-    icon: TrendingUp, color: 'blue', pages: '~12 pages',
+    id: 'exec',
+    name: 'Tổng quan Ban lãnh đạo',
+    desc: 'KPI cấp cao, số lượng quy trình ngầm, điểm tuân thủ và xu hướng',
+    icon: TrendingUp, color: 'blue', pages: '~12 trang',
   },
   {
-    id: 'compliance', name: 'Compliance Report', desc: 'Detailed compliance analysis, deviations, regulatory alignment',
-    icon: Shield, color: 'green', pages: '~22 pages',
+    id: 'compliance',
+    name: 'Báo cáo tuân thủ',
+    desc: 'Phân tích tuân thủ chi tiết, sai lệch, căn chỉnh quy định',
+    icon: Shield, color: 'green', pages: '~22 trang',
   },
   {
-    id: 'risk', name: 'Process Risk Report', desc: 'Shadow processes, risk scores, bottlenecks, and mitigation steps',
-    icon: AlertTriangle, color: 'red', pages: '~28 pages',
+    id: 'risk',
+    name: 'Báo cáo rủi ro quy trình',
+    desc: 'Quy trình ngầm, điểm rủi ro, tắc nghẽn và biện pháp giảm thiểu',
+    icon: AlertTriangle, color: 'red', pages: '~28 trang',
   },
   {
-    id: 'full', name: 'Full Analysis Report', desc: 'Complete analysis including all metrics, AI recommendations and action plan',
-    icon: FileCheck, color: 'purple', pages: '~45 pages',
+    id: 'full',
+    name: 'Báo cáo phân tích đầy đủ',
+    desc: 'Phân tích toàn diện bao gồm tất cả chỉ số, đề xuất AI và kế hoạch hành động',
+    icon: FileCheck, color: 'purple', pages: '~45 trang',
   },
 ]
 
@@ -66,11 +74,11 @@ export function ReportsPage() {
     setGenerating(templateId)
     await new Promise(r => setTimeout(r, 2000))
     setGenerating(null)
-    toast('success', 'Report generated!', `${name} is ready to download`)
+    toast('success', 'Báo cáo đã tạo xong!', `${name} sẵn sàng để tải xuống`)
   }
 
   const handleDownload = (name: string) => {
-    toast('info', 'Downloading...', name)
+    toast('info', 'Đang tải xuống...', name)
   }
 
   const filtered = typeFilter === 'all' ? reports : reports.filter(r => r.type === typeFilter)
@@ -84,14 +92,14 @@ export function ReportsPage() {
 
   return (
     <div className="p-6 space-y-6">
-      {/* Generate New Report */}
+      {/* Tạo báo cáo mới */}
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <FileText size={18} className="text-blue-600" />
-            Generate New Report
+            Tạo báo cáo mới
           </CardTitle>
-          <p className="text-xs text-slate-400 mt-0.5">Select a report template to generate a new PDF report</p>
+          <p className="text-xs text-slate-400 mt-0.5">Chọn mẫu báo cáo để tạo file PDF mới</p>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
@@ -116,7 +124,7 @@ export function ReportsPage() {
                       loading={generating === t.id}
                       onClick={() => handleGenerate(t.id, t.name)}
                     >
-                      {generating === t.id ? 'Generating...' : 'Generate'}
+                      {generating === t.id ? 'Đang tạo...' : 'Tạo báo cáo'}
                     </Button>
                   </div>
                 </div>
@@ -126,13 +134,13 @@ export function ReportsPage() {
         </CardContent>
       </Card>
 
-      {/* Report Library */}
+      {/* Thư viện báo cáo */}
       <Card>
         <CardHeader>
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle>Report Library</CardTitle>
-              <p className="text-xs text-slate-400 mt-0.5">{reports.length} reports available</p>
+              <CardTitle>Thư viện báo cáo</CardTitle>
+              <p className="text-xs text-slate-400 mt-0.5">{reports.length} báo cáo có sẵn</p>
             </div>
             <div className="flex items-center gap-2">
               <select
@@ -140,13 +148,13 @@ export function ReportsPage() {
                 onChange={e => setTypeFilter(e.target.value)}
                 className="h-9 px-3 text-sm rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 focus:outline-none"
               >
-                <option value="all">All Types</option>
-                <option value="executive">Executive</option>
-                <option value="compliance">Compliance</option>
-                <option value="risk">Risk</option>
-                <option value="process">Process</option>
+                <option value="all">Tất cả loại</option>
+                <option value="executive">Ban lãnh đạo</option>
+                <option value="compliance">Tuân thủ</option>
+                <option value="risk">Rủi ro</option>
+                <option value="process">Quy trình</option>
               </select>
-              <Button variant="ghost" size="icon" onClick={() => toast('info', 'Refreshing report list...')}>
+              <Button variant="ghost" size="icon" onClick={() => toast('info', 'Đang làm mới danh sách báo cáo...')}>
                 <RefreshCw size={14} />
               </Button>
             </div>
@@ -177,7 +185,7 @@ export function ReportsPage() {
                         {report.date}
                       </span>
                       {report.pages > 0 && (
-                        <span className="text-xs text-slate-400">{report.pages} pages</span>
+                        <span className="text-xs text-slate-400">{report.pages} trang</span>
                       )}
                       <span className="text-xs text-slate-400">{report.size}</span>
                     </div>
@@ -186,17 +194,17 @@ export function ReportsPage() {
                   <div className="flex items-center gap-3 flex-shrink-0">
                     <Badge variant={config.variant} size="sm">{config.label}</Badge>
                     {report.status === 'ready' ? (
-                      <Badge variant="success" size="sm">Ready</Badge>
+                      <Badge variant="success" size="sm">Sẵn sàng</Badge>
                     ) : report.status === 'scheduled' ? (
-                      <Badge variant="default" size="sm">Scheduled</Badge>
+                      <Badge variant="default" size="sm">Đã lên lịch</Badge>
                     ) : (
-                      <Badge variant="warning" size="sm">Generating</Badge>
+                      <Badge variant="warning" size="sm">Đang tạo</Badge>
                     )}
 
                     <div className="flex items-center gap-1">
                       {report.status === 'ready' && (
                         <>
-                          <Button variant="ghost" size="icon" onClick={() => toast('info', 'Opening preview...', report.name)}>
+                          <Button variant="ghost" size="icon" onClick={() => toast('info', 'Đang mở xem trước...', report.name)}>
                             <Eye size={14} />
                           </Button>
                           <Button variant="ghost" size="icon" onClick={() => handleDownload(report.name)}>

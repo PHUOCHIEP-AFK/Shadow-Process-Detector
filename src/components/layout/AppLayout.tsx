@@ -4,20 +4,20 @@ import { Sidebar } from './Sidebar'
 import { TopBar } from './TopBar'
 
 const pageTitles: Record<string, { title: string; subtitle: string }> = {
-  '/dashboard': { title: 'Dashboard', subtitle: 'Overview of process health and shadow activities' },
-  '/process-discovery': { title: 'Process Discovery', subtitle: 'Upload and analyze event logs and process models' },
-  '/process-comparison': { title: 'Process Comparison', subtitle: 'Compare official vs actual employee workflows' },
-  '/shadow-detection': { title: 'Shadow Process Detection', subtitle: 'Identify hidden and unofficial processes' },
-  '/bottleneck-analysis': { title: 'Bottleneck Analysis', subtitle: 'Diagnose delays and resource constraints' },
-  '/workflow-insights': { title: 'Employee Workflow Insights', subtitle: 'Understand how employees actually work' },
-  '/ai-recommendations': { title: 'AI Recommendations', subtitle: 'Intelligent process improvement suggestions' },
-  '/reports': { title: 'Reports', subtitle: 'Generate and export comprehensive process reports' },
-  '/settings': { title: 'Settings', subtitle: 'Manage users, roles, and system configuration' },
+  '/dashboard': { title: 'Bảng Điều Khiển', subtitle: 'Tổng quan về sức khỏe quy trình và hoạt động ngầm' },
+  '/process-discovery': { title: 'Khám Phá Quy Trình', subtitle: 'Tải lên và phân tích nhật ký sự kiện và mô hình quy trình' },
+  '/process-comparison': { title: 'So Sánh Quy Trình', subtitle: 'So sánh quy trình chính thức với quy trình thực tế của nhân viên' },
+  '/shadow-detection': { title: 'Phát Hiện Quy Trình Ngầm', subtitle: 'Xác định các quy trình ẩn và không chính thức' },
+  '/bottleneck-analysis': { title: 'Phân Tích Tắc Nghẽn', subtitle: 'Chẩn đoán sự chậm trễ và hạn chế nguồn lực' },
+  '/workflow-insights': { title: 'Thông Tin Quy Trình Nhân Viên', subtitle: 'Hiểu cách nhân viên thực sự làm việc' },
+  '/ai-recommendations': { title: 'Đề Xuất AI', subtitle: 'Gợi ý cải tiến quy trình thông minh' },
+  '/reports': { title: 'Báo Cáo', subtitle: 'Tạo và xuất báo cáo quy trình toàn diện' },
+  '/settings': { title: 'Cài Đặt', subtitle: 'Quản lý người dùng, vai trò và cấu hình hệ thống' },
 }
 
 export function AppLayout() {
   const location = useLocation()
-  const meta = pageTitles[location.pathname] || { title: 'Shadow Process Detector', subtitle: '' }
+  const meta = pageTitles[location.pathname] || { title: 'Phát Hiện Quy Trình Ngầm', subtitle: '' }
 
   return (
     <div className="flex h-screen bg-slate-50 dark:bg-slate-950 overflow-hidden">

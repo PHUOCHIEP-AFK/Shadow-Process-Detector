@@ -10,9 +10,9 @@ interface TopBarProps {
 }
 
 const notifications = [
-  { id: 1, title: 'New shadow process detected', desc: 'Finance dept — 2 min ago', unread: true },
-  { id: 2, title: 'Analysis complete', desc: 'Q4 Procurement scan finished — 15 min ago', unread: true },
-  { id: 3, title: 'Report ready', desc: 'Monthly compliance report — 1h ago', unread: false },
+  { id: 1, title: 'Phát hiện quy trình ngầm mới', desc: 'Phòng Tài chính — 2 phút trước', unread: true },
+  { id: 2, title: 'Phân tích hoàn tất', desc: 'Quét Q4 Mua sắm xong — 15 phút trước', unread: true },
+  { id: 3, title: 'Báo cáo sẵn sàng', desc: 'Báo cáo tuân thủ hàng tháng — 1 giờ trước', unread: false },
 ]
 
 export function TopBar({ title, subtitle }: TopBarProps) {
@@ -24,31 +24,31 @@ export function TopBar({ title, subtitle }: TopBarProps) {
 
   return (
     <header className="h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700/60 flex items-center px-6 gap-4 flex-shrink-0">
-      {/* Title */}
+      {/* Tiêu đề */}
       <div className="flex-1">
         <h1 className="text-xl font-bold text-slate-900 dark:text-slate-100">{title}</h1>
         {subtitle && <p className="text-xs text-slate-400 mt-0.5">{subtitle}</p>}
       </div>
 
-      {/* Search */}
+      {/* Tìm kiếm */}
       <div className="relative hidden md:block">
         <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
         <input
           value={searchQuery}
           onChange={e => setSearchQuery(e.target.value)}
-          placeholder="Search processes, reports..."
+          placeholder="Tìm kiếm quy trình, báo cáo..."
           className="w-64 h-9 pl-9 pr-4 text-sm rounded-lg bg-slate-100 dark:bg-slate-800 border-0 text-slate-700 dark:text-slate-300 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </div>
 
-      {/* Actions */}
+      {/* Hành động */}
       <div className="flex items-center gap-1">
-        {/* Theme toggle */}
+        {/* Chuyển đổi giao diện */}
         <Button variant="ghost" size="icon" onClick={toggleTheme} className="text-slate-500">
           {theme === 'light' ? <Moon size={16} /> : <Sun size={16} />}
         </Button>
 
-        {/* Notifications */}
+        {/* Thông báo */}
         <div className="relative">
           <Button variant="ghost" size="icon" onClick={() => setShowNotifications(!showNotifications)} className="text-slate-500 relative">
             <Bell size={16} />
@@ -61,8 +61,8 @@ export function TopBar({ title, subtitle }: TopBarProps) {
               <div className="fixed inset-0 z-40" onClick={() => setShowNotifications(false)} />
               <div className="absolute right-0 top-full mt-2 w-80 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl shadow-xl z-50">
                 <div className="px-4 py-3 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
-                  <span className="font-semibold text-sm text-slate-900 dark:text-slate-100">Notifications</span>
-                  <span className="text-xs text-blue-600 cursor-pointer hover:underline">Mark all read</span>
+                  <span className="font-semibold text-sm text-slate-900 dark:text-slate-100">Thông báo</span>
+                  <span className="text-xs text-blue-600 cursor-pointer hover:underline">Đánh dấu đã đọc</span>
                 </div>
                 {notifications.map(n => (
                   <div key={n.id} className={cn('px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer border-b border-slate-50 dark:border-slate-800 last:border-0', n.unread && 'bg-blue-50/50 dark:bg-blue-900/10')}>
@@ -81,12 +81,12 @@ export function TopBar({ title, subtitle }: TopBarProps) {
           )}
         </div>
 
-        {/* Settings */}
+        {/* Cài đặt */}
         <Button variant="ghost" size="icon" className="text-slate-500">
           <Settings size={16} />
         </Button>
 
-        {/* Profile */}
+        {/* Hồ sơ */}
         <div className="relative">
           <button
             onClick={() => setShowProfile(!showProfile)}
@@ -96,8 +96,8 @@ export function TopBar({ title, subtitle }: TopBarProps) {
               JD
             </div>
             <div className="hidden md:block text-left">
-              <p className="text-xs font-semibold text-slate-700 dark:text-slate-300">John Doe</p>
-              <p className="text-[10px] text-slate-400">Admin</p>
+              <p className="text-xs font-semibold text-slate-700 dark:text-slate-300">Nguyễn Văn A</p>
+              <p className="text-[10px] text-slate-400">Quản trị viên</p>
             </div>
             <ChevronDown size={14} className="text-slate-400" />
           </button>
@@ -105,7 +105,7 @@ export function TopBar({ title, subtitle }: TopBarProps) {
             <>
               <div className="fixed inset-0 z-40" onClick={() => setShowProfile(false)} />
               <div className="absolute right-0 top-full mt-2 w-48 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl shadow-xl z-50 py-1">
-                {['Profile', 'Team Settings', 'Billing', 'Sign Out'].map(item => (
+                {['Hồ sơ', 'Cài đặt nhóm', 'Thanh toán', 'Đăng xuất'].map(item => (
                   <button key={item} className="w-full text-left px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
                     {item}
                   </button>

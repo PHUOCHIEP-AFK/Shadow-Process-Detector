@@ -8,7 +8,7 @@ import { useToast } from '@/contexts/ToastContext'
 export function LoginPage() {
   const navigate = useNavigate()
   const { toast } = useToast()
-  const [email, setEmail] = useState('admin@company.com')
+  const [email, setEmail] = useState('admin@congty.com')
   const [password, setPassword] = useState('password')
   const [showPass, setShowPass] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -18,7 +18,7 @@ export function LoginPage() {
     setLoading(true)
     await new Promise(r => setTimeout(r, 1200))
     setLoading(false)
-    toast('success', 'Welcome back!', 'Signed in successfully.')
+    toast('success', 'Chào mừng trở lại!', 'Đăng nhập thành công.')
     navigate('/dashboard')
   }
 
@@ -30,16 +30,16 @@ export function LoginPage() {
   }
 
   const features = [
-    { icon: Shield, label: 'Compliance Monitoring', desc: 'Real-time process compliance tracking' },
-    { icon: Zap, label: 'AI-Powered Analysis', desc: 'Intelligent shadow process detection' },
-    { icon: BarChart3, label: 'Advanced Analytics', desc: 'Deep dive into workflow patterns' },
+    { icon: Shield, label: 'Giám sát tuân thủ', desc: 'Theo dõi tuân thủ quy trình theo thời gian thực' },
+    { icon: Zap, label: 'Phân tích AI', desc: 'Phát hiện quy trình ngầm thông minh' },
+    { icon: BarChart3, label: 'Phân tích nâng cao', desc: 'Khám phá sâu các mẫu quy trình làm việc' },
   ]
 
   return (
     <div className="min-h-screen flex bg-slate-950">
-      {/* Left Panel - Branding */}
+      {/* Bảng trái - Thương hiệu */}
       <div className="hidden lg:flex flex-col w-[55%] bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 p-12 relative overflow-hidden">
-        {/* Background Pattern */}
+        {/* Hoa văn nền */}
         <div className="absolute inset-0 opacity-10">
           <svg className="w-full h-full" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
             <defs>
@@ -51,7 +51,7 @@ export function LoginPage() {
           </svg>
         </div>
 
-        {/* Animated blobs */}
+        {/* Hiệu ứng nền */}
         <div className="absolute top-20 left-20 w-64 h-64 bg-blue-600/20 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-20 right-20 w-80 h-80 bg-indigo-600/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
 
@@ -61,12 +61,12 @@ export function LoginPage() {
             <Activity size={20} className="text-white" />
           </div>
           <div>
-            <p className="font-bold text-white text-lg leading-none">Shadow Process</p>
-            <p className="text-blue-400 text-sm">Detector Platform</p>
+            <p className="font-bold text-white text-lg leading-none">Quy Trình Ngầm</p>
+            <p className="text-blue-400 text-sm">Nền tảng phát hiện</p>
           </div>
         </div>
 
-        {/* Main Headline */}
+        {/* Tiêu đề chính */}
         <div className="relative z-10 flex-1">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -74,18 +74,18 @@ export function LoginPage() {
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-4xl font-bold text-white leading-tight mb-6">
-              Uncover Hidden<br />
+              Khám phá những<br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
-                Workflow Gaps
+                Quy trình ẩn
               </span>
             </h2>
             <p className="text-slate-300 text-lg leading-relaxed mb-12 max-w-md">
-              Discover the processes your teams actually use versus what was designed. 
-              Eliminate inefficiencies, ensure compliance, and optimize operations.
+              Khám phá sự khác biệt giữa quy trình được thiết kế và quy trình nhân viên thực sự sử dụng.
+              Loại bỏ kém hiệu quả, đảm bảo tuân thủ và tối ưu hóa vận hành.
             </p>
           </motion.div>
 
-          {/* Feature Cards */}
+          {/* Thẻ tính năng */}
           <div className="space-y-4">
             {features.map((f, i) => (
               <motion.div
@@ -107,12 +107,12 @@ export function LoginPage() {
           </div>
         </div>
 
-        {/* Stats at bottom */}
+        {/* Thống kê ở dưới */}
         <div className="relative z-10 grid grid-cols-3 gap-4 mt-12">
           {[
-            { value: '2,400+', label: 'Processes Analyzed' },
-            { value: '98.2%', label: 'Detection Accuracy' },
-            { value: '350+', label: 'Enterprise Clients' },
+            { value: '2.400+', label: 'Quy trình đã phân tích' },
+            { value: '98,2%', label: 'Độ chính xác phát hiện' },
+            { value: '350+', label: 'Khách hàng doanh nghiệp' },
           ].map((s, i) => (
             <motion.div
               key={s.label}
@@ -128,7 +128,7 @@ export function LoginPage() {
         </div>
       </div>
 
-      {/* Right Panel - Login Form */}
+      {/* Bảng phải - Form đăng nhập */}
       <div className="flex-1 flex items-center justify-center p-8 bg-slate-950">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
@@ -136,22 +136,22 @@ export function LoginPage() {
           transition={{ duration: 0.5 }}
           className="w-full max-w-md"
         >
-          {/* Mobile Logo */}
+          {/* Logo trên mobile */}
           <div className="flex lg:hidden items-center gap-3 mb-10 justify-center">
             <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center">
               <Activity size={20} className="text-white" />
             </div>
             <div>
-              <p className="font-bold text-white text-lg leading-none">Shadow Process Detector</p>
+              <p className="font-bold text-white text-lg leading-none">Phát Hiện Quy Trình Ngầm</p>
             </div>
           </div>
 
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-white mb-2">Welcome back</h1>
-            <p className="text-slate-400">Sign in to your enterprise account</p>
+            <h1 className="text-3xl font-bold text-white mb-2">Chào mừng trở lại</h1>
+            <p className="text-slate-400">Đăng nhập vào tài khoản doanh nghiệp của bạn</p>
           </div>
 
-          {/* SSO Button */}
+          {/* Nút SSO */}
           <button
             onClick={handleSSO}
             disabled={loading}
@@ -163,7 +163,7 @@ export function LoginPage() {
               <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
               <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
             </svg>
-            Continue with Google SSO
+            Đăng nhập với Google SSO
           </button>
 
           <div className="relative mb-6">
@@ -171,14 +171,14 @@ export function LoginPage() {
               <div className="w-full border-t border-slate-800" />
             </div>
             <div className="relative flex justify-center">
-              <span className="bg-slate-950 px-3 text-xs text-slate-500">or sign in with email</span>
+              <span className="bg-slate-950 px-3 text-xs text-slate-500">hoặc đăng nhập bằng email</span>
             </div>
           </div>
 
-          {/* Login Form */}
+          {/* Form đăng nhập */}
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-1.5">Email address</label>
+              <label className="block text-sm font-medium text-slate-300 mb-1.5">Địa chỉ email</label>
               <div className="relative">
                 <Mail size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
                 <input
@@ -186,7 +186,7 @@ export function LoginPage() {
                   value={email}
                   onChange={e => setEmail(e.target.value)}
                   className="w-full h-11 pl-10 pr-4 rounded-xl bg-slate-900 border border-slate-700 text-white placeholder:text-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="you@company.com"
+                  placeholder="ban@congty.com"
                   required
                 />
               </div>
@@ -194,8 +194,8 @@ export function LoginPage() {
 
             <div>
               <div className="flex items-center justify-between mb-1.5">
-                <label className="text-sm font-medium text-slate-300">Password</label>
-                <a href="#" className="text-xs text-blue-400 hover:text-blue-300">Forgot password?</a>
+                <label className="text-sm font-medium text-slate-300">Mật khẩu</label>
+                <a href="#" className="text-xs text-blue-400 hover:text-blue-300">Quên mật khẩu?</a>
               </div>
               <div className="relative">
                 <Lock size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
@@ -219,7 +219,7 @@ export function LoginPage() {
 
             <div className="flex items-center gap-2">
               <input type="checkbox" id="remember" className="rounded border-slate-700 bg-slate-900 text-blue-600" />
-              <label htmlFor="remember" className="text-sm text-slate-400">Remember me for 30 days</label>
+              <label htmlFor="remember" className="text-sm text-slate-400">Ghi nhớ trong 30 ngày</label>
             </div>
 
             <Button
@@ -229,16 +229,16 @@ export function LoginPage() {
               loading={loading}
               className="w-full mt-2 bg-blue-600 hover:bg-blue-700 rounded-xl h-11"
             >
-              Sign in to Dashboard
+              Đăng nhập vào bảng điều khiển
             </Button>
           </form>
 
           <p className="text-center text-sm text-slate-500 mt-6">
-            Don't have an account?{' '}
-            <a href="#" className="text-blue-400 hover:text-blue-300 font-medium">Request access</a>
+            Chưa có tài khoản?{' '}
+            <a href="#" className="text-blue-400 hover:text-blue-300 font-medium">Yêu cầu truy cập</a>
           </p>
 
-          {/* Trust badges */}
+          {/* Huy hiệu bảo mật */}
           <div className="flex items-center justify-center gap-4 mt-8 pt-8 border-t border-slate-800">
             {['SOC 2', 'GDPR', 'ISO 27001'].map(badge => (
               <div key={badge} className="flex items-center gap-1.5 text-xs text-slate-500">

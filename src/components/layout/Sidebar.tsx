@@ -9,22 +9,22 @@ import {
 import { cn } from '@/lib/utils'
 
 const navItems = [
-  { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard, group: 'main' },
-  { path: '/process-discovery', label: 'Process Discovery', icon: Search, group: 'analysis' },
-  { path: '/process-comparison', label: 'Process Comparison', icon: GitCompare, group: 'analysis' },
-  { path: '/shadow-detection', label: 'Shadow Detection', icon: Eye, group: 'analysis' },
-  { path: '/bottleneck-analysis', label: 'Bottleneck Analysis', icon: BarChart3, group: 'analysis' },
-  { path: '/workflow-insights', label: 'Workflow Insights', icon: Brain, group: 'analysis' },
-  { path: '/ai-recommendations', label: 'AI Recommendations', icon: Lightbulb, group: 'insights' },
-  { path: '/reports', label: 'Reports', icon: FileText, group: 'insights' },
-  { path: '/settings', label: 'Settings', icon: Settings, group: 'admin' },
+  { path: '/dashboard', label: 'Bảng điều khiển', icon: LayoutDashboard, group: 'main' },
+  { path: '/process-discovery', label: 'Khám phá quy trình', icon: Search, group: 'analysis' },
+  { path: '/process-comparison', label: 'So sánh quy trình', icon: GitCompare, group: 'analysis' },
+  { path: '/shadow-detection', label: 'Phát hiện quy trình ngầm', icon: Eye, group: 'analysis' },
+  { path: '/bottleneck-analysis', label: 'Phân tích tắc nghẽn', icon: BarChart3, group: 'analysis' },
+  { path: '/workflow-insights', label: 'Thông tin quy trình', icon: Brain, group: 'analysis' },
+  { path: '/ai-recommendations', label: 'Đề xuất AI', icon: Lightbulb, group: 'insights' },
+  { path: '/reports', label: 'Báo cáo', icon: FileText, group: 'insights' },
+  { path: '/settings', label: 'Cài đặt', icon: Settings, group: 'admin' },
 ]
 
 const groups = {
   main: '',
-  analysis: 'ANALYSIS',
-  insights: 'INSIGHTS',
-  admin: 'ADMIN',
+  analysis: 'PHÂN TÍCH',
+  insights: 'THÔNG TIN',
+  admin: 'QUẢN TRỊ',
 }
 
 export function Sidebar() {
@@ -51,8 +51,8 @@ export function Sidebar() {
         <AnimatePresence>
           {!collapsed && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="overflow-hidden">
-              <p className="font-bold text-sm text-white whitespace-nowrap">Shadow Process</p>
-              <p className="text-xs text-slate-400 whitespace-nowrap">Detector</p>
+              <p className="font-bold text-sm text-white whitespace-nowrap">Quy Trình Ngầm</p>
+              <p className="text-xs text-slate-400 whitespace-nowrap">Phát Hiện</p>
             </motion.div>
           )}
         </AnimatePresence>
@@ -119,11 +119,11 @@ export function Sidebar() {
           >
             <div className="flex items-center gap-2 mb-2">
               <Zap size={14} className="text-yellow-300" />
-              <span className="text-xs font-semibold text-white">Pro Plan</span>
+              <span className="text-xs font-semibold text-white">Gói Pro</span>
             </div>
-            <p className="text-xs text-blue-100 mb-2 leading-relaxed">Unlock AI analysis and advanced reports</p>
+            <p className="text-xs text-blue-100 mb-2 leading-relaxed">Mở khóa phân tích AI và báo cáo nâng cao</p>
             <button className="w-full py-1.5 text-xs font-semibold bg-white text-blue-600 rounded-lg hover:bg-blue-50 transition-colors">
-              Upgrade Now
+              Nâng cấp ngay
             </button>
           </motion.div>
         )}

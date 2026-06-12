@@ -12,29 +12,29 @@ import { toolUsageData } from '@/data/mockData'
 const COLORS = ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#06B6D4', '#F97316', '#EC4899']
 
 const workflowVariations = [
-  { name: 'Standard Flow', count: 312, percentage: 45, color: '#3B82F6' },
-  { name: 'Email Shortcut', count: 187, percentage: 27, color: '#10B981' },
-  { name: 'Manager Bypass', count: 98, percentage: 14, color: '#F59E0B' },
-  { name: 'Multi-Approval', count: 67, percentage: 10, color: '#EF4444' },
-  { name: 'Self-Approved', count: 28, percentage: 4, color: '#8B5CF6' },
+  { name: 'Luồng chuẩn', count: 312, percentage: 45, color: '#3B82F6' },
+  { name: 'Lối tắt qua email', count: 187, percentage: 27, color: '#10B981' },
+  { name: 'Bỏ qua quản lý', count: 98, percentage: 14, color: '#F59E0B' },
+  { name: 'Đa phê duyệt', count: 67, percentage: 10, color: '#EF4444' },
+  { name: 'Tự phê duyệt', count: 28, percentage: 4, color: '#8B5CF6' },
 ]
 
 const collaborationData = [
-  { dept: 'Finance↔Procurement', strength: 87, interactions: 342 },
-  { dept: 'HR↔Operations', strength: 64, interactions: 218 },
-  { dept: 'IT↔All Depts', strength: 91, interactions: 567 },
-  { dept: 'Legal↔Finance', strength: 72, interactions: 189 },
-  { dept: 'Sales↔Operations', strength: 58, interactions: 143 },
-  { dept: 'Procurement↔Legal', strength: 45, interactions: 98 },
+  { dept: 'Tài chính↔Mua sắm', strength: 87, interactions: 342 },
+  { dept: 'Nhân sự↔Vận hành', strength: 64, interactions: 218 },
+  { dept: 'CNTT↔Tất cả phòng', strength: 91, interactions: 567 },
+  { dept: 'Pháp lý↔Tài chính', strength: 72, interactions: 189 },
+  { dept: 'Kinh doanh↔Vận hành', strength: 58, interactions: 143 },
+  { dept: 'Mua sắm↔Pháp lý', strength: 45, interactions: 98 },
 ]
 
 const sankeyLike = [
-  { from: 'Request Submitted', to: 'Official Approval', value: 312, color: '#3B82F6' },
-  { from: 'Request Submitted', to: 'Email Chain', value: 189, color: '#F59E0B' },
-  { from: 'Request Submitted', to: 'WhatsApp Group', value: 98, color: '#EF4444' },
-  { from: 'Official Approval', to: 'Payment', value: 298, color: '#3B82F6' },
-  { from: 'Email Chain', to: 'Payment', value: 156, color: '#F59E0B' },
-  { from: 'WhatsApp Group', to: 'Payment', value: 84, color: '#EF4444' },
+  { from: 'Yêu cầu gửi', to: 'Phê duyệt chính thức', value: 312, color: '#3B82F6' },
+  { from: 'Yêu cầu gửi', to: 'Chuỗi email', value: 189, color: '#F59E0B' },
+  { from: 'Yêu cầu gửi', to: 'Nhóm WhatsApp', value: 98, color: '#EF4444' },
+  { from: 'Phê duyệt chính thức', to: 'Thanh toán', value: 298, color: '#3B82F6' },
+  { from: 'Chuỗi email', to: 'Thanh toán', value: 156, color: '#F59E0B' },
+  { from: 'Nhóm WhatsApp', to: 'Thanh toán', value: 84, color: '#EF4444' },
 ]
 
 const CustomTooltip = ({ active, payload, label }: any) => {

@@ -25,7 +25,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
         <p className="text-xs text-slate-400 mb-1.5 font-medium">{label}</p>
         {payload.map((p: any, i: number) => (
           <p key={i} className="text-xs font-semibold" style={{ color: p.color }}>
-            {p.name}: {p.value}{p.name.includes('Score') || p.name.includes('Compliance') ? '%' : ''}
+            {p.name}: {p.value}%
           </p>
         ))}
       </div>
@@ -50,25 +50,33 @@ const activityBadge: Record<string, 'danger' | 'warning' | 'info' | 'success'> =
   success: 'success',
 }
 
+const severityLabel: Record<string, string> = {
+  critical: 'Nghiêm trọng',
+  high: 'Cao',
+  warning: 'Cảnh báo',
+  info: 'Thông tin',
+  success: 'Thành công',
+}
+
 export function DashboardPage() {
   const navigate = useNavigate()
   const [timeRange, setTimeRange] = useState('12m')
 
   const stats = [
-    { title: 'Total Processes', value: kpiData.totalProcesses, subtitle: '+12 this month', icon: <Layers size={16} />, color: 'blue' as const, trend: { value: 5.1 }, index: 0 },
-    { title: 'Shadow Processes', value: kpiData.shadowProcesses, subtitle: '+4 this week', icon: <AlertTriangle size={16} />, color: 'red' as const, trend: { value: 12.1 }, index: 1 },
-    { title: 'Compliance Score', value: `${kpiData.complianceScore}%`, subtitle: 'vs 74.2% last month', icon: <CheckCircle size={16} />, color: 'green' as const, trend: { value: 4.2 }, index: 2 },
-    { title: 'Bottlenecks Found', value: kpiData.bottlenecks, subtitle: '3 critical, 6 high', icon: <Zap size={16} />, color: 'yellow' as const, trend: { value: -8.3 }, index: 3 },
-    { title: 'High Risk Processes', value: kpiData.highRiskProcesses, subtitle: 'Needs immediate review', icon: <Activity size={16} />, color: 'red' as const, trend: { value: 2.5 }, index: 4 },
+    { title: 'Tổng quy trình', value: kpiData.totalProcesses, subtitle: '+12 tháng này', icon: <Layers size={16} />, color: 'blue' as const, trend: { value: 5.1 }, index: 0 },
+    { title: 'Quy trình ngầm', value: kpiData.shadowProcesses, subtitle: '+4 tuần này', icon: <AlertTriangle size={16} />, color: 'red' as const, trend: { value: 12.1 }, index: 1 },
+    { title: 'Điểm tuân thủ', value: `${kpiData.complianceScore}%`, subtitle: 'so với 74,2% tháng trước', icon: <CheckCircle size={16} />, color: 'green' as const, trend: { value: 4.2 }, index: 2 },
+    { title: 'Điểm tắc nghẽn', value: kpiData.bottlenecks, subtitle: '3 nghiêm trọng, 6 cao', icon: <Zap size={16} />, color: 'yellow' as const, trend: { value: -8.3 }, index: 3 },
+    { title: 'Quy trình rủi ro cao', value: kpiData.highRiskProcesses, subtitle: 'Cần xem xét ngay', icon: <Activity size={16} />, color: 'red' as const, trend: { value: 2.5 }, index: 4 },
   ]
 
   return (
     <div className="p-6 space-y-6">
-      {/* Header */}
+      {/* Tiêu đề */}
       <div className="flex items-center justify-between">
         <div>
           <p className="text-sm text-slate-500 dark:text-slate-400">
-            Friday, June 12, 2026 • Last scan: <span className="text-blue-600">2 minutes ago</span>
+            Thứ Sáu, 12 tháng 6 năm 2026 • Lần quét cuối: <span className="text-blue-600">2 phút trước</span>
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -91,31 +99,31 @@ export function DashboardPage() {
             leftIcon={<Activity size={13} />}
             onClick={() => navigate('/process-discovery')}
           >
-            Run New Scan
+            Quét mới
           </Button>
         </div>
       </div>
 
-      {/* KPI Cards */}
+      {/* Thẻ KPI */}
       <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4">
         {stats.map(s => (
           <StatCard key={s.title} {...s} />
         ))}
       </div>
 
-      {/* Charts Row 1 */}
+      {/* Hàng biểu đồ 1 */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
-        {/* Compliance Trend */}
+        {/* Xu hướng tuân thủ */}
         <Card className="xl:col-span-2">
           <CardHeader className="flex flex-row items-center justify-between">
             <div>
-              <CardTitle>Process Compliance Trend</CardTitle>
-              <p className="text-xs text-slate-400 mt-0.5">Official vs actual process compliance over time</p>
+              <CardTitle>Xu Hướng Tuân Thủ Quy Trình</CardTitle>
+              <p className="text-xs text-slate-400 mt-0.5">Quy trình chính thức so với thực tế theo thời gian</p>
             </div>
             <div className="flex items-center gap-3 text-xs">
-              <span className="flex items-center gap-1.5"><span className="w-3 h-0.5 bg-blue-500 inline-block rounded" /> Official</span>
-              <span className="flex items-center gap-1.5"><span className="w-3 h-0.5 bg-emerald-500 inline-block rounded" /> Actual</span>
-              <span className="flex items-center gap-1.5"><span className="w-3 h-0.5 bg-slate-400 border-dashed border-t border-slate-400 inline-block" /> Target</span>
+              <span className="flex items-center gap-1.5"><span className="w-3 h-0.5 bg-blue-500 inline-block rounded" /> Chính thức</span>
+              <span className="flex items-center gap-1.5"><span className="w-3 h-0.5 bg-emerald-500 inline-block rounded" /> Thực tế</span>
+              <span className="flex items-center gap-1.5"><span className="w-3 h-0.5 bg-slate-400 border-dashed border-t border-slate-400 inline-block" /> Mục tiêu</span>
             </div>
           </CardHeader>
           <CardContent>
@@ -135,19 +143,19 @@ export function DashboardPage() {
                 <XAxis dataKey="month" tick={{ fontSize: 11, fill: '#64748b' }} axisLine={false} tickLine={false} />
                 <YAxis tick={{ fontSize: 11, fill: '#64748b' }} axisLine={false} tickLine={false} domain={[50, 100]} unit="%" />
                 <Tooltip content={<CustomTooltip />} />
-                <Area type="monotone" dataKey="official" stroke="#3B82F6" strokeWidth={2} fill="url(#colorOfficial)" name="Official" />
-                <Area type="monotone" dataKey="actual" stroke="#10B981" strokeWidth={2} fill="url(#colorActual)" name="Actual" />
-                <Line type="monotone" dataKey="target" stroke="#94a3b8" strokeWidth={1.5} strokeDasharray="4 4" dot={false} name="Target" />
+                <Area type="monotone" dataKey="official" stroke="#3B82F6" strokeWidth={2} fill="url(#colorOfficial)" name="Chính thức" />
+                <Area type="monotone" dataKey="actual" stroke="#10B981" strokeWidth={2} fill="url(#colorActual)" name="Thực tế" />
+                <Line type="monotone" dataKey="target" stroke="#94a3b8" strokeWidth={1.5} strokeDasharray="4 4" dot={false} name="Mục tiêu" />
               </AreaChart>
             </ResponsiveContainer>
           </CardContent>
         </Card>
 
-        {/* Department Risk */}
+        {/* Xếp hạng rủi ro phòng ban */}
         <Card>
           <CardHeader>
-            <CardTitle>Department Risk Ranking</CardTitle>
-            <p className="text-xs text-slate-400 mt-0.5">By risk score</p>
+            <CardTitle>Xếp Hạng Rủi Ro Phòng Ban</CardTitle>
+            <p className="text-xs text-slate-400 mt-0.5">Theo điểm rủi ro</p>
           </CardHeader>
           <CardContent className="space-y-3">
             {departmentRiskData.sort((a, b) => b.riskScore - a.riskScore).map((d, i) => (
@@ -175,13 +183,13 @@ export function DashboardPage() {
         </Card>
       </div>
 
-      {/* Charts Row 2 */}
+      {/* Hàng biểu đồ 2 */}
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-        {/* Shadow Process Growth */}
+        {/* Tăng trưởng quy trình ngầm */}
         <Card>
           <CardHeader>
-            <CardTitle>Shadow Process Growth</CardTitle>
-            <p className="text-xs text-slate-400 mt-0.5">Detected vs resolved per week</p>
+            <CardTitle>Tăng Trưởng Quy Trình Ngầm</CardTitle>
+            <p className="text-xs text-slate-400 mt-0.5">Phát hiện so với đã giải quyết mỗi tuần</p>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={200}>
@@ -190,22 +198,22 @@ export function DashboardPage() {
                 <XAxis dataKey="week" tick={{ fontSize: 11, fill: '#64748b' }} axisLine={false} tickLine={false} />
                 <YAxis tick={{ fontSize: 11, fill: '#64748b' }} axisLine={false} tickLine={false} />
                 <Tooltip content={<CustomTooltip />} />
-                <Bar dataKey="detected" fill="#ef4444" radius={[4, 4, 0, 0]} name="Detected" maxBarSize={20} />
-                <Bar dataKey="resolved" fill="#10b981" radius={[4, 4, 0, 0]} name="Resolved" maxBarSize={20} />
+                <Bar dataKey="detected" fill="#ef4444" radius={[4, 4, 0, 0]} name="Phát hiện" maxBarSize={20} />
+                <Bar dataKey="resolved" fill="#10b981" radius={[4, 4, 0, 0]} name="Đã giải quyết" maxBarSize={20} />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
         </Card>
 
-        {/* Recent Activity */}
+        {/* Hoạt động gần đây */}
         <Card>
           <CardHeader className="flex flex-row items-center justify-between">
             <div>
-              <CardTitle>Recent Activity</CardTitle>
-              <p className="text-xs text-slate-400 mt-0.5">Latest detections and updates</p>
+              <CardTitle>Hoạt Động Gần Đây</CardTitle>
+              <p className="text-xs text-slate-400 mt-0.5">Các phát hiện và cập nhật mới nhất</p>
             </div>
             <Button variant="ghost" size="sm" rightIcon={<ArrowRight size={12} />} onClick={() => navigate('/shadow-detection')}>
-              View All
+              Xem tất cả
             </Button>
           </CardHeader>
           <CardContent className="space-y-1">
@@ -226,7 +234,7 @@ export function DashboardPage() {
                   </div>
                 </div>
                 <Badge variant={activityBadge[item.severity] || 'default'} size="sm">
-                  {item.severity}
+                  {severityLabel[item.severity] || item.severity}
                 </Badge>
               </motion.div>
             ))}
@@ -234,13 +242,13 @@ export function DashboardPage() {
         </Card>
       </div>
 
-      {/* Quick Actions */}
+      {/* Thao tác nhanh */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {[
-          { label: 'Analyze New Process', icon: TrendingUp, path: '/process-discovery', color: 'blue' },
-          { label: 'Compare Workflows', icon: Activity, path: '/process-comparison', color: 'purple' },
-          { label: 'View Bottlenecks', icon: Zap, path: '/bottleneck-analysis', color: 'yellow' },
-          { label: 'AI Recommendations', icon: CheckCircle, path: '/ai-recommendations', color: 'green' },
+          { label: 'Phân tích quy trình mới', icon: TrendingUp, path: '/process-discovery' },
+          { label: 'So sánh quy trình', icon: Activity, path: '/process-comparison' },
+          { label: 'Xem tắc nghẽn', icon: Zap, path: '/bottleneck-analysis' },
+          { label: 'Đề xuất AI', icon: CheckCircle, path: '/ai-recommendations' },
         ].map(a => (
           <button
             key={a.label}
